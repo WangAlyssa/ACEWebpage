@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, X, ChevronDown, Globe } from "lucide-react";
 import { navItems, siteConfig } from "@/lib/data";
 import { useLocale } from "@/lib/locale-context";
+import AceLogo from "@/components/AceLogo";
 
 export default function Header() {
   const { locale, setLocale, t } = useLocale();
@@ -29,9 +30,11 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-18">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-navy-800 to-accent-500 flex items-center justify-center shadow-lg group-hover:shadow-accent-500/25 transition-shadow">
-              <span className="text-white font-bold text-sm tracking-tight">ACE</span>
-            </div>
+            <AceLogo
+              size="md"
+              priority
+              imageClassName="transition-transform group-hover:scale-105"
+            />
             <span
               className={`font-semibold text-lg hidden sm:block transition-colors ${
                 scrolled ? "text-navy-900" : "text-white"

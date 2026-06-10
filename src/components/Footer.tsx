@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/data";
 import { useLocale } from "@/lib/locale-context";
+import AceLogo from "@/components/AceLogo";
 
 export default function Footer() {
   const { locale, t } = useLocale();
@@ -12,10 +13,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-navy-700 to-accent-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">ACE</span>
-              </div>
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <AceLogo size="md" imageClassName="group-hover:scale-105 transition-transform" />
               <span className="font-semibold text-white">{t(siteConfig.name)}</span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed">
