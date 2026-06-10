@@ -4,13 +4,17 @@ const isGithubPages = process.env.GITHUB_PAGES === "true";
 const repoName = "ACEWebpage";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
-  images: { unoptimized: true },
-  ...(isGithubPages && {
-    basePath: `/${repoName}`,
-    assetPrefix: `/${repoName}/`,
-  }),
+  ...(isGithubPages
+    ? {
+        output: "export",
+        trailingSlash: true,
+        basePath: `/${repoName}`,
+        assetPrefix: `/${repoName}/`,
+        images: { unoptimized: true },
+      }
+    : {
+        images: { unoptimized: true },
+      }),
 };
 
 export default nextConfig;

@@ -44,55 +44,48 @@ npm run dev
 
 ## 构建部署
 
-### GitHub Pages（自动部署）
+### 推荐：Vercel 免费域名（无 github 字样）
 
-推送到 `main` 分支后，GitHub Actions 会自动构建并部署。
+完全免费，可自定义项目名，例如 **`acesummercourse.vercel.app`**。
 
-**首次启用（只需做一次）：**
+**一键部署（约 2 分钟）：**
 
-1. 打开仓库 Settings → Pages
-2. Source 选择 **GitHub Actions**
-3. 推送代码后等待 workflow 完成
+1. 点击下方按钮（或打开链接），用 GitHub 登录 Vercel  
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FWangAlyssa%2FACEWebpage&project-name=acesummercourse)
 
-**默认访问地址：**
+   直接链接：  
+   https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FWangAlyssa%2FACEWebpage&project-name=acesummercourse
 
-https://wangalyssa.github.io/ACEWebpage/
+2. **Project Name** 填 `acesummercourse`（或你喜欢的名字，即成为子域名）
+3. 点击 **Deploy**，等待完成
+4. 访问：**https://acesummercourse.vercel.app**
 
-### 绑定自定义域名
+之后每次 push 到 `main`，Vercel 会自动更新网站。
 
-GitHub **不提供**域名购买，需要自行在域名注册商购买（如 Cloudflare、Namecheap、GoDaddy、阿里云等），然后绑定到 GitHub Pages。
+**其他免费子域名（同样无 github）：**
 
-**步骤：**
+| 平台 | 示例地址 | 说明 |
+|------|----------|------|
+| Vercel | `acesummercourse.vercel.app` | 推荐，Next.js 原生支持 |
+| Netlify | `acesummercourse.netlify.app` | 导入 GitHub 仓库即可 |
+| Cloudflare Pages | `acesummercourse.pages.dev` | 免费，速度好 |
 
-1. 购买域名，例如 `acesummerschool.com`
-2. 在 DNS 添加记录：
-   - 类型 `CNAME`，主机 `www`，值 `wangalyssa.github.io`
-   - 根域名 `@` 可用 ALIAS/ANAME 指向 `wangalyssa.github.io`，或用 A 记录指向 GitHub IP：
-     - `185.199.108.153`
-     - `185.199.109.153`
-     - `185.199.110.153`
-     - `185.199.111.153`
-3. 复制 `public/CNAME.example` 为 `public/CNAME`，写入你的域名（如 `www.acesummerschool.com`）
-4. 修改 `.github/workflows/deploy.yml`，将 build 步骤改为**不使用** basePath：
+> 真正的 `.com` / `.cn` 域名无法长期免费获得；上面这些**免费子域名**最适合你的需求。
 
-```yaml
-- name: Build static site
-  run: npm run build
-  # 自定义域名时不要用 build:gh-pages
-```
+### GitHub Pages（备用，地址含 github.io）
 
-5. 仓库 Settings → Pages → Custom domain 填入域名并启用 HTTPS
-6. 推送后生效（DNS 传播可能需要几小时）
+推送到 `main` 后 GitHub Actions 自动部署。
 
-> 自定义域名与 `github.io/ACEWebpage` 路径不能同时完美工作——绑定域名后应去掉 `basePath`；未绑域名时用 `build:gh-pages` 即可。
+**首次启用：** 仓库 Settings → Pages → Source 选 **GitHub Actions**
+
+地址：https://wangalyssa.github.io/ACEWebpage/（含 github 字样，可作备用）
 
 ### 本地构建
 
 ```bash
-npm run build          # 本地预览用（无 basePath）
-npm run build:gh-pages # 模拟 GitHub Pages 路径
-npm start              # 需先 build，本地不支持 static export 的 start
-npx serve out          # 静态预览 build 产物
+npm run build          # Vercel / 本地
+npm run build:gh-pages # GitHub Pages 专用
+npx serve out          # 预览 GitHub Pages 静态产物
 ```
 
 
